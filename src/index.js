@@ -4,7 +4,8 @@ module.exports = function multiply(first, second) {
     let secondNum = [];
     first = first.toString();
     second = second.toString();
-
+    console.log(first);
+    console.log(second);
     function mult(first, number) {
         if(typeof number == "string")
             number = Number(number);
@@ -58,9 +59,18 @@ module.exports = function multiply(first, second) {
             excess > 0){
             longNumber.unshift(excess);
         }else{
-            let sum = Number(longNumber[longNumber.length - i]) + excess;
+            while(i <= longNumber.length){
+                let sum = Number(longNumber[longNumber.length - i]) + excess;
+                longNumber[longNumber.length - i] = (sum % 10).toString();
+                excess = Math.floor(sum / 10);
+                if(excess == 0)
+                    break;
+                i++;
+            }
+            if(excess > 0){
+                longNumber.unshift(excess);
+            }
 
-            longNumber[longNumber.length - i] = sum.toString();
         }
         //console.log(longNumber.join(''));
         return longNumber.join('');
@@ -106,6 +116,11 @@ module.exports = function multiply(first, second) {
     //     '329865843872563478658342756873375683268326587346582436583456' == second )
     //     console.log(multBig(first, second) ==
     //         multBig('76095476904769456798433934759347589346587346578342658346285963489253465783', '329865843872563478658342756873375683268326587346582436583456'));
-    return multBig(first, second);
+    console.log(sum('9999999', '1'));
+    //console.log(multBig('7609547690984334', '3298658326587346582436'));
+    //console.log(7609547690984334*3298658326587346582436);
+    let t = multBig(first, second);
+    //console.log(t);
+    return t;
     //return '' + first*second;
 }
